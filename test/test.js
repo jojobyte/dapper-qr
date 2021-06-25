@@ -10,12 +10,11 @@ function generateRandomString(length) {
 }
 
 exports["Test SVG output"] = function(test) {
-  test.expect(6);
+  test.expect(5);
   
   var qrcode = new QRCode("Hello World!");
   test.ok(typeof qrcode == "object", "Expected object as the result!");
   test.ok(typeof qrcode.svg == "function", "Missing 'svg' function!");
-  test.ok(typeof qrcode.save == "function", "Missing 'save' function!");
   
   var svg = qrcode.svg();
   test.ok(typeof svg == "string", "Expected string as the result!");
@@ -201,63 +200,4 @@ exports["Test other options"] = function(test) {
   }, Error, "Error in predefined shape!");
   
   test.done();
-};
-
-exports["Test by generating samples"] = function(test) {
-  test.expect(5);
-  
-  var fs = require('fs');
-  var path = require('path');
-  
-  var folder = "samples";
-  if (!fs.existsSync(folder)) {
-    fs.mkdirSync(folder);
-  }
-  
-  test.doesNotThrow(function() {
-    new QRCode({ content: "test" })
-    .save(path.join(folder, "sample_default.svg"));
-  }, Error, "Should generate a QR Code file!");
-  
-  test.doesNotThrow(function() {
-    new QRCode({
-      content: "test",
-      background: "beige",
-      color: "blue",
-      join: true
-    })
-    .save(path.join(folder, "sample_path_data.svg"));
-  }, Error, "Should generate a QR Code file!");
-  
-  test.doesNotThrow(function() {
-    new QRCode({
-      content: "test",
-      background: "beige",
-      color: "maroon",
-      predefined: true
-    })
-    .save(path.join(folder, "sample_defs_use.svg"));
-  }, Error, "Should generate a QR Code file!");
-  
-  test.doesNotThrow(function() {
-    new QRCode({
-      content: "test",
-      background: "white",
-      color: "black",
-      swap: true
-    })
-    .save(path.join(folder, "sample_swap_xy.svg"));
-  }, Error, "Should generate a QR Code file!");
-  
-  test.doesNotThrow(function() {
-    new QRCode({
-      content: "test",
-      pretty: false
-    })
-    .save(path.join(folder, "sample_no_pretty.svg"));
-  }, Error, "Should generate a QR Code file!");
-  
-  setTimeout(function() {
-    test.done();
-  }, 1000);
 };

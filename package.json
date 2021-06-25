@@ -9,9 +9,6 @@
     "minify": "node minify.js",
     "test": "nodeunit test"
   },
-  "bin": {
-    "qrcode-svg": "bin/qrcode-svg.js"
-  },
   "keywords": [
     "qrcode",
     "svg"
