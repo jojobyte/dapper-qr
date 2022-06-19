@@ -10,12 +10,12 @@ This library has been written to generate a SVG image of QR Code in Node.js, goa
 
 Install the package:
 ```bash
-npm install qrcode-svg
+npm install @lemaik/qrcode-svg
 ```
 
 Inline example:
 ```javascript
-var QRCode = require("qrcode-svg");
+var QRCode = require("@lemaik/qrcode-svg");
 var svg = new QRCode("Hello World!").svg();
 ```
 
@@ -177,7 +177,7 @@ Examples:
 
 Using [html-pdf](https://www.npmjs.com/package/html-pdf) to convert SVG to PDF (or PNG or JPEG)
 ```javascript
-var QRCode = require('qrcode-svg');
+var QRCode = require('@lemaik/qrcode-svg');
 var svg = new QRCode('hello').svg();
 ...
 var pdf = require('html-pdf');
@@ -190,7 +190,7 @@ pdf.create(svg, { border: 0, type: 'pdf' }).toFile('output.pdf', function(err, r
 
 QR Code in ASCII to output in a shell
 ```javascript
-var QRCode = require('qrcode-svg');
+var QRCode = require('@lemaik/qrcode-svg');
 
 var hello = new QRCode("Hello World!");
 var modules = hello.qrcode.modules;
