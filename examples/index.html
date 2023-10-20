@@ -1,12 +1,48 @@
 <!DOCTYPE html>
 <html>
+<head>
+<title>QR Code Example</title>
+<style>
+  html, body {
+    background-color: #121921;
+    color: #fff;
+  }
+  #container {
+    background: #0000 no-repeat center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10rem;
+  }
+  #container img {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+  }
+</style>
+</head>
 <body>
-<div id="container"></div>
+<div id="container">
+  <img src="./js.svg" />
+</div>
 <script src="../lib/qrcode.js"></script>
+<!-- <script src="../dist/qrcode.min.js"></script> -->
 <script>
-var qrcode = new QRCode({ content: "Hello World!", join: true, predefined: true, ecl: 'H' });
+var qrcode = new QRCode({
+  content: "Hello World!",
+  background: null,
+  shapeRendering: 'auto',
+  padding: 4,
+  ecl: 'H',
+  hole: 7,
+  color: 'currentColor',
+  strokeColor: 'currentColor',
+  strokeWidth: 1,
+});
 var svg = qrcode.svg();
-document.getElementById("container").innerHTML = svg;
+let con = document.getElementById("container")
+con.insertAdjacentHTML('beforeend', svg)
 </script>
 </body>
 </html>
