@@ -1,8 +1,23 @@
 {
-  "name": "@lemaik/qrcode-svg",
-  "version": "1.2.0",
-  "description": "A simple QR Code generator in pure JavaScript",
-  "author": "papnkukn",
+  "name": "@jojobyte/dapper-qr",
+  "version": "1.3.0",
+  "description": "A simple (zero dependency) QR Code generator in Vanilla JavaScript",
+  "author": "jojobyte <byte@jojo.io> (https://jojo.io/)",
+  "contributors": [
+    "papnkukn",
+    "leMaik",
+    "jp-ed",
+    "adrien-powder",
+    "jojobyte <byte@jojo.io> (https://jojo.io/)"
+  ],
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/jojobyte"
+    },
+    "https://ko-fi.com/jojobyte",
+    "https://liberapay.com/jojobyte/"
+  ],
   "license": "MIT",
   "main": "lib/qrcode.js",
   "scripts": {
@@ -10,19 +25,24 @@
     "test": "nodeunit test"
   },
   "keywords": [
+    "qr",
+    "code",
     "qrcode",
-    "svg"
+    "svg",
+    "zero-dependency",
+    "zero",
+    "dependency"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leMaik/qrcode-svg.git"
+    "url": "git+https://github.com/jojobyte/dapper-qr.git"
   },
   "bugs": {
-    "url": "https://github.com/leMaik/qrcode-svg/issues"
+    "url": "https://github.com/jojobyte/dapper-qr/issues"
   },
-  "homepage": "https://github.com/leMaik/qrcode-svg",
+  "homepage": "https://github.com/jojobyte/dapper-qr",
   "devDependencies": {
-    "minify": "^4.1.3",
+    "minify": "^7.2.2",
     "nodeunit": "^0.11.3"
   }
 }
