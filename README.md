@@ -30,10 +30,7 @@ var qrcode = new QRCode({
   background: "#ffffff",
   ecl: "M",
 });
-qrcode.save("sample.svg", function(error) {
-  if (error) throw error;
-  console.log("Done!");
-});
+qrcode.svg();
 ```
 
 ## Options
@@ -140,37 +137,6 @@ Output with `defs` and `use` elements
 </svg>
 ```
 
-## Command Line
-
-```
-Usage:
-  qrcode-svg [options] <content>
-
-Options:
-  --help                 Print this message
-  --version, -v          Print version number
-  --padding , -p [value] Offset in number of modules
-  --width, -w [px]       Image width in pixels
-  --height, -h [px]      Image height in pixels
-  --color, -fg [color]   Foreground color, hex or name
-  --background [color]   Background color, hex or name
-  --ecl [value]          Error correction level: L, M, H, Q
-  --join                 Join modules into one SVG path, i.e. for crisp rendering
-  --predefined           Use 'defs' and 'use' elements in SVG, i.e. for compact output
-  --no-prettify          Avoid indenting and new lines in SVG, i.e. for compact output
-  --viewbox              Use 'viewBox' instead of 'width' and 'height' attributes
-  --swap-fix             Swap X and Y modules to fix issues with some QR readers
-  --output, -o [file]    Output file name
-  --force, -f            Force overwrite
-
-Examples:
-  qrcode-svg http://github.com
-  qrcode-svg -f -o hello.svg "Hello World"
-  qrcode-svg -p 4 -w 256 -h 256 --join --viewbox "Responsive..."
-  qrcode-svg --padding 2 --width 120 --height 120 "Little fox..."
-  qrcode-svg --color blue --background #ececec "...jumps over" 
-```
-
 ## Usage Scenarios
 
 ### Convert to other formats
@@ -266,6 +232,8 @@ document.getElementById("container").innerHTML = svg;
 Thanks to [davidshimjs](https://github.com/davidshimjs/qrcodejs) for the base library.
 
 Thanks to [Kazuhiko Arase](http://www.d-project.com/) for the original QR Code in JavaScript algorithm.
+
+Thanks to [papnkukn](https://github.com/papnkukn/qrcode-svg) for the original QR Code SVG library
 
 Thanks to all contributors on the GitHub.
 
