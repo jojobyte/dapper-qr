@@ -1,21 +1,22 @@
 ## Introduction
 
 This library has been written to generate a SVG image of QR Code in Node.js, goals:
-* pure JavaScript
-* no browser requirement
-* no external dependencies
-* generate SVG output
+* Vanilla JavaScript
+* No external dependencies
+* Generate SVG output
+
+It is a hard fork based on [papnkukn/qrcode-svg](https://github.com/papnkukn/qrcode-svg) and various other contributors.
 
 ## Getting Started
 
 Install the package:
 ```bash
-npm install @lemaik/qrcode-svg
+npm install dapper-qr
 ```
 
 Inline example:
 ```javascript
-var QRCode = require("@lemaik/qrcode-svg");
+var QRCode = require("dapper-qr");
 var svg = new QRCode("Hello World!").svg();
 ```
 
@@ -35,15 +36,22 @@ qrcode.svg();
 
 ## Options
 
+  // shapeRendering: 'auto',
 **List of options:**
 * **content** - QR Code content, the only **required** parameter
 * **padding** - white space padding, `4` modules by default, `0` for no border
 * **width** - QR Code width in pixels
 * **height** - QR Code height in pixels
-* **color** - color of modules (squares), color name or hex string, e.g. `#000000`
-* **background** - color of background, color name or hex string, e.g. `white`
-* **ecl** - error correction level: `L`, `M`, `H`, `Q`
+* **color** - color of modules (squares), color name or hex string (e.g. `#000000`)
+* **background** - color of background, color name (e.g. `white`), hex string or `null` to disable
+* **strokeColor** - stroke color of modules (squares), color name or hex string (e.g. `#000000`)
+* **strokeWidth** - Number of width to apply to stroke
+* **shapeRendering** - Override SVG shape-rendering (default: `crispEdges`)
+* **ecl** - error correction level: `L`, `M`, `Q`, `H`
+* **hole** - Cut a hole into the center of the SVG (default: `0`)
 * **join** - join modules (squares) into one shape, into the SVG `path` element, **recommended** for web and responsive use, default: `false`
+* **dotStyle** - Draw QR points as `rect` or `circle` (default: `rect`)
+* **useAttrs** - Use attribute styling instead of inline `style` (default: `true`)
 * **predefined** - to create a squares as pattern, then populate the canvas, default: `false`, see the output examples below
 * **pretty** - apply indents and new lines, default: `true`
 * **swap** - swap X and Y modules, only if you have issues with some QR readers, default: `false`
@@ -69,7 +77,8 @@ Default options
 var qrcode = new QRCode({
   content: "Pretty Fox",
   join: false,
-  predefined: false
+  useAttrs: false,
+  predefined: false,
 });
 ```
 
@@ -96,7 +105,8 @@ Set `join` to `true`
 var qrcode = new QRCode({
   content: "Pretty Fox",
   join: true,
-  container: "svg-viewbox" //Useful but not required
+  useAttrs: false,
+  container: "svg-viewbox", // Useful but not required
 });
 ```
 
@@ -118,7 +128,8 @@ Set `predefined` to `true`
 ```javascript
 var qrcode = new QRCode({
   content: "Pretty Fox",
-  predefined: true
+  useAttrs: false,
+  predefined: true,
 });
 ```
 
@@ -143,7 +154,7 @@ Output with `defs` and `use` elements
 
 Using [html-pdf](https://www.npmjs.com/package/html-pdf) to convert SVG to PDF (or PNG or JPEG)
 ```javascript
-var QRCode = require('@lemaik/qrcode-svg');
+var QRCode = require('dapper-qr');
 var svg = new QRCode('hello').svg();
 ...
 var pdf = require('html-pdf');
@@ -156,7 +167,7 @@ pdf.create(svg, { border: 0, type: 'pdf' }).toFile('output.pdf', function(err, r
 
 QR Code in ASCII to output in a shell
 ```javascript
-var QRCode = require('@lemaik/qrcode-svg');
+var QRCode = require('dapper-qr');
 
 var hello = new QRCode("Hello World!");
 var modules = hello.qrcode.modules;
@@ -183,23 +194,23 @@ console.log(ascii);
     x xxx x  x   x  x x xxx x
     x     x  x  xx xx x     x
     xxxxxxx x x x x x xxxxxxx
-            xx     xx        
+            xx     xx
     x x  xx    x x   xx   x x
        x x  xx x    xx x xx x
      x  x xx   x x x  xx   xx
      x xx  xxx xx x x  x  x x
      xx  xxxx       xxxx    x
     x x  x xx x xx xx x xx xx
-    x    xx   xxxx    xxxx   
+    x    xx   xxxx    xxxx
     xx xx   x  x  x x xx    x
        xxxx xxxx    xxxxxx  x
-                    x   x x  
+                    x   x x
     xxxxxxx  x  xxx x x x   x
-    x     x xxx  x xx   x  x 
+    x     x xxx  x xx   x  x
     x xxx x        xxxxxxxxxx
-    x xxx x  xxxxxxxxx  x xx 
+    x xxx x  xxxxxxxxx  x xx
     x xxx x xxx  xx  x    x x
-    x     x    x    x     x  
+    x     x    x    x     x
     xxxxxxx xxx xxx   x   x x
 
 
@@ -217,8 +228,8 @@ Use on a HTML page with JavaScript
 <script>
 var qrcode = new QRCode({
   content: "Hello World!",
-  container: "svg-viewbox", //Responsive use
-  join: true //Crisp rendering and 4-5x reduced file size
+  container: "svg-viewbox", // Responsive use
+  join: true, // Crisp rendering and 4-5x reduced file size
 });
 var svg = qrcode.svg();
 document.getElementById("container").innerHTML = svg;
@@ -234,6 +245,10 @@ Thanks to [davidshimjs](https://github.com/davidshimjs/qrcodejs) for the base li
 Thanks to [Kazuhiko Arase](http://www.d-project.com/) for the original QR Code in JavaScript algorithm.
 
 Thanks to [papnkukn](https://github.com/papnkukn/qrcode-svg) for the original QR Code SVG library
+
+Thanks to [leMaik](https://github.com/leMaik/qrcode-svg) & [jp-ed](https://github.com/jp-ed/qrcode-svg) for PRs to the papnkukn QR Code SVG library
+
+Thanks to [adrien-powder](https://github.com/adrien-powder/qrcode-svg) for figuring out how to make a hole in the QR code
 
 Thanks to all contributors on the GitHub.
 
