@@ -21,8 +21,9 @@
   "license": "MIT",
   "main": "lib/qrcode.js",
   "scripts": {
-    "minify": "node minify.js",
-    "test": "nodeunit test"
+    "banner": "node -p -e 'let b,r=require,p=r(`./package.json`);b=`/*! ${p.name} v${p.version} | ${p.homepage} | MIT license */\n`;r(`fs`).writeFileSync(`dist/qrcode.min.js`,b)'",
+    "minify": "npm run banner && npx -y minify@9 lib/qrcode.js >> dist/qrcode.min.js",
+    "test": "npx -y nodeunit@0.11.3 test"
   },
   "keywords": [
     "qr",
@@ -40,9 +41,5 @@
   "bugs": {
     "url": "https://github.com/jojobyte/dapper-qr/issues"
   },
-  "homepage": "https://github.com/jojobyte/dapper-qr",
-  "devDependencies": {
-    "minify": "^7.2.2",
-    "nodeunit": "^0.11.3"
-  }
+  "homepage": "https://github.com/jojobyte/dapper-qr"
 }
